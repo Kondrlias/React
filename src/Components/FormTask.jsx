@@ -21,7 +21,7 @@ function Tasks() {
 			<ul>
 				{tasks.map(item => { return <li>{item}</li> })}
 			</ul>
-			<button onClick={getTasks ? getTasks : 'Пусто'}>Добавить задачу</button>
+			<button onClick={getTasks}>Добавить задачу</button>
 			<button onClick={deleteTasks}>Удалить последнюю задачу</button>
 		</article>
 
