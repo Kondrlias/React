@@ -1,18 +1,12 @@
-import './App.css'
-import Items from './Components/FormBasket'
-import Tasks from './Components/FormTask'
-import User from './Components/FormUser'
+import './App.css';
+import LifecycleComponent from './Components/LifecycleComponent';
 
 function App() {
-
-
   return (
     <>
-      <User />
-      <Tasks />
-      <Items />
+      <LifecycleComponent />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
