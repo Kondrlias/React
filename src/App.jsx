@@ -1,33 +1,61 @@
-import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
+import { useEffect, useState } from 'react';
 import './App.css';
+import CreateGalary from './Components/CreateGalary';
+import Loading from './Components/Loading';
+import NumberImage from './Components/NumberImage';
+import SelectBreed from './Components/SelectBreed';
+import UpdateCount from './Components/UpdateCount';
 
 function App() {
   const [count, setCount] = useState(0);
+  const [numberImg, setNumberImg] = useState(3);
+  const [images, setImages] = useState([]);
+  const [selectedBreed, setSelectedBreed] = useState('all');
+  const [isLoading, setIsLoading] = useState(true);
+
+  const fetchNum = async () => {
+    setIsLoading(true);
+    try {
+      let response;
+      if (selectedBreed !== 'all') {
+        response = await fetch(
+          `https://dog.ceo/api/breed/${selectedBreed}/images/random/${numberImg}`
+        );
+      } else {
+        response = await fetch(
+          `https://dog.ceo/api/breeds/image/random/${numberImg}`
+        );
+      }
+      const res = await response.json();
+      setImages(res.message);
+      console.log('Render');
+    } catch (error) {
+      console.error('Ошибка при загрузке изображений:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchNum();
+  }, [count, selectedBreed]);
+
+  const handleSelectBreed = (breed) => {
+    setSelectedBreed(breed);
+  };
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <h1>Галерея собак</h1>
+      <UpdateCount count={count} />
+      <SelectBreed onSelectBreed={handleSelectBreed} />
+      <NumberImage
+        numberImg={numberImg}
+        setNumberImg={setNumberImg}
+        count={count}
+        setCount={setCount}
+      />
+      {isLoading ? <Loading /> : <CreateGalary images={images} />}
     </>
   );
 }
