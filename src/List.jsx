@@ -1,25 +1,8 @@
-import { useEffect, useState } from "react";
-
-const List = ({ array }) => {
-  const [items, setItems] = useState(array);
-
-  const handleClick = (id) => {
-    console.log("click");
-    setItems((prevItems) =>
-      prevItems.map((item) =>
-        item.id === id ? { ...item, status: !item.status } : item,
-      ),
-    );
-  };
-
-  useEffect(() => {
-    setItems(array);
-  }, [array]);
-
+const List = ({ array, changeStatus }) => {
   return (
     <>
       <ul>
-        {items.map((item) => {
+        {array.map((item) => {
           return (
             <li
               key={item.id}
@@ -31,7 +14,7 @@ const List = ({ array }) => {
               {item.title}
               <button
                 onClick={() => {
-                  handleClick(item.id);
+                  changeStatus(item.id);
                 }}
                 style={{ marginLeft: "20px" }}
               >

@@ -30,6 +30,15 @@ function App() {
       setText("");
     }
   };
+
+  const changeStatus = (id) => {
+    setToDo((prevItems) =>
+      prevItems.map((item) =>
+        item.id === id ? { ...item, status: !item.status } : item,
+      ),
+    );
+  };
+
   return (
     <>
       <input
@@ -42,7 +51,11 @@ function App() {
       <button onClick={focusInput} style={{ marginLeft: "20px" }}>
         Focus
       </button>
-      <List array={toDo} style={{ padding: "20px 0" }} />
+      <List
+        array={toDo}
+        changeStatus={changeStatus}
+        style={{ padding: "20px 0" }}
+      />
     </>
   );
 }
