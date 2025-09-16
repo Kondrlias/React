@@ -1,7 +1,6 @@
 import { memo } from "react";
 
 function CardItem({ item, setItem }) {
-  console.log(`Rerender Card item ${item.id}`);
 
   const addItem = (id) => {
     setItem((prevItems) =>

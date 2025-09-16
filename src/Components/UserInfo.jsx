@@ -1,7 +1,6 @@
 import { memo } from "react";
 
 function UserInfo({ user }) {
-  console.log("Rerender UserInfo");
 
   return (
     <div>

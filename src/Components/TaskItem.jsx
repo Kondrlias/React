@@ -13,7 +13,6 @@ function TaskItem({ tasks }) {
 }
 
 const Task = memo(({ task }) => {
-  console.log(`ReRedner ${task}`);
   return <li>{task}</li>;
 });
 
