@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import TaskItem from "./TaskItem";
+import { ThemeContext } from "./ThemeContext";
 
 function Tasks() {
+  const theme = useContext(ThemeContext);
   const [tasks, setTasks] = useState(["Task1"]);
 
   const getTasks = () => {
@@ -16,7 +18,7 @@ function Tasks() {
   };
 
   return (
-    <div>
+    <div className={theme}>
       <article className="form">
         <h2>Список задач</h2>
         <TaskItem tasks={tasks} />

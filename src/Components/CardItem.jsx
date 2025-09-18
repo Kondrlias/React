@@ -1,7 +1,6 @@
 import { memo } from "react";
 
 function CardItem({ item, setItem }) {
-
   const addItem = (id) => {
     setItem((prevItems) =>
       prevItems.map((item) =>

@@ -1,7 +1,6 @@
 import { memo } from "react";
 
 function UserInfo({ user }) {
-
   return (
     <div>
       <h2>Профиль пользователя</h2>

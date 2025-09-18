@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import UserInfo from "./UserInfo";
+import { ThemeContext } from "./ThemeContext";
 
 function User() {
+  const theme = useContext(ThemeContext);
   const [user, setUser] = useState({
     name: "Иван",
     age: 25,
@@ -30,7 +32,7 @@ function User() {
   };
 
   return (
-    <div>
+    <div className={theme}>
       <article className="form">
         <UserInfo user={user} />
         <button onClick={changeName}>Сменить имя</button>
